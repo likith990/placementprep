@@ -21,8 +21,8 @@ app.set("trust proxy", 1);
 app.use(
   cors({
     origin:[
-    "http://localhost:5173",
-    "https://placementprep-bice.vercel.app",
+     "http://localhost:5173",
+    process.env.BETTER_AUTH_URL,
   ],
     credentials: true,
   })
@@ -43,9 +43,7 @@ app.all("/api/auth/*path", toNodeHandler(auth));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 
-app.get("/",(req,res)=>{
-    res.send("hello everyone");
-})
+
 
 app.get("/api/test",(req,res)=>{
     res.json({message:"hello everyone"});
