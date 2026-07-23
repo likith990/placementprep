@@ -7,7 +7,9 @@ import dotenv from "dotenv";
 import auth from "./auth.js";
 import { toNodeHandler } from "better-auth/node";
 
+
 dotenv.config();
+const PORT=process.env.PORT || 8080;
 
 
 const app=express();
@@ -40,6 +42,6 @@ app.get("/api/test",(req,res)=>{
     res.json({message:"hello everyone"});
 })
 
-app.listen(8080,()=>{
+app.listen(PORT,()=>{
     console.log("listening");
 })
