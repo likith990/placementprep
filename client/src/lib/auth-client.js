@@ -2,5 +2,5 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://placementprep-3m4y.onrender.com",
 });

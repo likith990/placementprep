@@ -11,7 +11,10 @@ const client = new MongoClient(process.env.ATLASDB_URL);
 const auth = betterAuth({
     database: mongodbAdapter(client.db()),
 
-    trustedOrigins: ["http://localhost:5173"],
+    trustedOrigins: [
+  "http://localhost:5173",
+  "https://placementprep-bice.vercel.app",
+],
 
     socialProviders: {
   google: {
