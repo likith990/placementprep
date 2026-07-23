@@ -49,7 +49,7 @@ app.get("/api/test",(req,res)=>{
     res.json({message:"hello everyone"});
 })
 
-app.get("/*", (req, res) => {
+app.get("/{*splat}", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
