@@ -3,14 +3,7 @@ import { useEffect } from "react";
 import { authClient } from "./lib/auth-client";
 
 function App() {
-  useEffect(() => {
-    async function test() {
-      let response = await fetch("http://localhost:8080/api/test");
-      let data = await response.json();
-      console.log(data);
-    }
-    test();
-  }, []);
+
 
   const { data: session } = authClient.useSession();
   console.log(session);
