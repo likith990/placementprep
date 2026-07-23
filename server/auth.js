@@ -17,6 +17,17 @@ const auth = betterAuth({
   "https://placementprep-bice.vercel.app",
 ],
 
+advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+    },
+  },
+
+  account: {
+    skipStateCookieCheck: true,
+  },
+
     socialProviders: {
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
