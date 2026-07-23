@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new MongoClient(process.env.ATLASDB_URL);
+await client.connect(); 
 
 const auth = betterAuth({
     database: mongodbAdapter(client.db()),
