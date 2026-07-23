@@ -11,7 +11,7 @@ function App() {
   async function login() {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://placementprep-bice.vercel.app",
+      callbackURL: window.location.origin,
     });
   }
 
