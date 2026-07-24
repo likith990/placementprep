@@ -49,7 +49,7 @@ console.log("inside sync ");
    const session = await auth.api.getSession({
         headers: req.headers,
     });
-    console.log(session.user.emial)
+    console.log(session.user.email)
     res.json({ success: true });
 })
 
