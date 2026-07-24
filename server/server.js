@@ -44,12 +44,13 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 
 app.post("/api/users/sync",async(req,res)=>{
-
+console.log("inside sync ");
 
    const session = await auth.api.getSession({
         headers: req.headers,
     });
     console.log(session)
+    res.json({ success: true });
 })
 
 app.get("/api/test",(req,res)=>{
