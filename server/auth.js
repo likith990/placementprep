@@ -15,14 +15,15 @@ const auth = betterAuth({
     trustedOrigins: [
   "http://localhost:5173",
   "https://placementprep-bice.vercel.app",
+  "https://placementprep-3m4y.onrender.com",
 ],
 
-advanced: {
-    defaultCookieAttributes: {
-      sameSite: "none",
-      secure: true,
-    },
-  },
+// advanced: {
+//     defaultCookieAttributes: {
+//       sameSite: "none",
+//       secure: true,
+//     },
+//   },
 
   account: {
     skipStateCookieCheck: true,

@@ -43,7 +43,14 @@ app.all("/api/auth/*path", toNodeHandler(auth));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 
+app.post("/api/users/sync",async(req,res)=>{
 
+
+   const session = await auth.api.getSession({
+        headers: req.headers,
+    });
+    console.log(session)
+})
 
 app.get("/api/test",(req,res)=>{
     res.json({message:"hello everyone"});
