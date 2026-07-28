@@ -12,13 +12,14 @@ export async function getCurrUser(req, res) {
         success: false,
         message: "Unauthorized",
     });
-}else{
+  }
+
   const curruser=await User.findOne({authUserId:session.user.id})
   
   return res.status(200).json({
     success: true,
     user: curruser,
-});
+  });
 }
 
 }

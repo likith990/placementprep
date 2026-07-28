@@ -1,4 +1,3 @@
-
 import Notification from "../models/notificationSchema.js";
 
 export async function getNotifications(req, res) {
@@ -14,8 +13,10 @@ export async function getNotifications(req, res) {
 
     res.status(200).json({ notifications, unreadCount });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to fetch notifications", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch notifications", error: err.message });
   }
 }
 
@@ -26,7 +27,7 @@ export async function markAsRead(req, res) {
     const notification = await Notification.findOneAndUpdate(
       { _id: id, user: req.currentUser._id },
       { read: true },
-      { new: true }
+      { new: true },
     );
 
     if (!notification) {
@@ -35,8 +36,10 @@ export async function markAsRead(req, res) {
 
     res.status(200).json(notification);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to mark as read", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to mark as read", error: err.message });
   }
 }
 
@@ -44,11 +47,13 @@ export async function markAllAsRead(req, res) {
   try {
     await Notification.updateMany(
       { user: req.currentUser._id, read: false },
-      { read: true }
+      { read: true },
     );
     res.status(200).json({ message: "All marked as read" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to mark all as read", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to mark all as read", error: err.message });
   }
 }

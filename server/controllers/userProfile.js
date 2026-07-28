@@ -1,5 +1,3 @@
-
-
 import User from "../models/User.js";
 import Slot from "../models/Slot.js";
 import { getFeedbackSummary } from "../utils/feedbackHelpers.js";
@@ -12,7 +10,7 @@ export async function getUserProfile(req, res) {
     const { id } = req.params;
 
     const user = await User.findById(id).select(
-      "username email bio skills experienceLevel targetRole links"
+      "username email bio skills experienceLevel targetRole links",
     );
 
     if (!user) {
@@ -36,8 +34,10 @@ export async function getUserProfile(req, res) {
       sessionCount,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to fetch profile", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch profile", error: err.message });
   }
 }
 
@@ -69,7 +69,9 @@ export async function updateMyProfile(req, res) {
 
     res.status(200).json({ user: updated });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to update profile", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to update profile", error: err.message });
   }
 }

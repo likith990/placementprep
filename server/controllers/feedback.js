@@ -1,14 +1,21 @@
-
 import Feedback from "../models/Feedback.js";
-import { getPendingFeedback, getFeedbackSummary } from "../utils/feedbackHelpers.js";
+import {
+  getPendingFeedback,
+  getFeedbackSummary,
+} from "../utils/feedbackHelpers.js";
 
 export async function getMyPendingFeedback(req, res) {
   try {
     const pending = await getPendingFeedback(req.currentUser._id);
     res.status(200).json(pending);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to fetch pending feedback", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({
+        message: "Failed to fetch pending feedback",
+        error: err.message,
+      });
   }
 }
 
@@ -18,17 +25,26 @@ export async function submitFeedback(req, res) {
     const fromUser = req.currentUser._id;
 
     if (!slotId || !toUserId) {
-      return res.status(400).json({ message: "slotId and toUserId are required" });
+      return res
+        .status(400)
+        .json({ message: "slotId and toUserId are required" });
     }
 
     if (toUserId === fromUser.toString()) {
-      return res.status(400).json({ message: "You can't submit feedback for yourself" });
+      return res
+        .status(400)
+        .json({ message: "You can't submit feedback for yourself" });
     }
 
     if (!noShow) {
       const { communication, technical, problemSolving } = ratings || {};
       if (!communication || !technical || !problemSolving) {
-        return res.status(400).json({ message: "All three ratings are required unless reporting a no-show" });
+        return res
+          .status(400)
+          .json({
+            message:
+              "All three ratings are required unless reporting a no-show",
+          });
       }
     }
 
@@ -44,14 +60,18 @@ export async function submitFeedback(req, res) {
     res.status(201).json(feedback);
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).json({ message: "You've already submitted feedback for this session" });
+      return res
+        .status(400)
+        .json({
+          message: "You've already submitted feedback for this session",
+        });
     }
-    console.error(err);
-    res.status(500).json({ message: "Failed to submit feedback", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to submit feedback", error: err.message });
   }
 }
-
-
 
 export async function getUserFeedback(req, res) {
   try {
@@ -59,7 +79,9 @@ export async function getUserFeedback(req, res) {
     const summary = await getFeedbackSummary(userId);
     res.status(200).json(summary);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to fetch user feedback", error: err.message });
+    req.log.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch user feedback", error: err.message });
   }
 }
