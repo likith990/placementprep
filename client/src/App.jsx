@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { authClient } from "./lib/auth-client";
+import { API_BASE } from "./config.js";
+import { useContext } from "react";
+import { UserContext } from "./context/userContext";
 
 import LandingPage from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import { useAuth } from "./hooks/useAuth";
+import getCurrUser from "./services/userServices";
 
 function App() {
   // const { data: session } = authClient.useSession();
@@ -32,21 +36,23 @@ function App() {
   // );
 
   const { session, login, logout, isPending } = useAuth();
+  const { setUser } = useContext(UserContext);
 
-
-
-   useEffect(() => {
+  useEffect(() => {
     if (!session) return;
 
     async function syncUser() {
-      await fetch("https://placementprep-3m4y.onrender.com/api/users/sync", {
+      await fetch(`${API_BASE}/api/users/sync`, {
         method: "POST",
         credentials: "include",
       });
+
+      let userdata = await getCurrUser();
+      setUser(userdata);
     }
 
     syncUser();
-  },[session]);
+  }, [session]);
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -55,8 +61,6 @@ function App() {
   if (!session) {
     return <LandingPage login={login} />;
   }
-
- 
 
   return <Dashboard session={session} logout={logout} />;
 }

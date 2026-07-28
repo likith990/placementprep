@@ -1,0 +1,167 @@
+
+
+.posted-slot-card {
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  color: #f5f5f5;
+  max-width: 480px;
+}
+
+.posted-slot-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.posted-slot-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.posted-slot-time,
+.posted-slot-count {
+  font-size: 12.5px;
+  color: #9a9a9a;
+}
+
+.posted-slot-section {
+  margin-top: 12px;
+}
+
+.posted-slot-section h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #d4d4d4;
+}
+
+.posted-slot-empty {
+  font-size: 12.5px;
+  color: #6a6a6a;
+  margin: 0;
+}
+
+.request-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.request-row:last-child {
+  border-bottom: none;
+}
+
+.request-name {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.request-message {
+  font-size: 12px;
+  color: #9a9a9a;
+  margin-top: 2px;
+}
+
+.request-resume {
+  font-size: 11.5px;
+  color: #7c8cff;
+  text-decoration: none;
+}
+
+.request-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.accept-btn,
+.decline-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.accept-btn {
+  background-color: #1f3a29;
+  color: #81c995;
+}
+.accept-btn:hover {
+  background-color: #234a30;
+}
+
+.decline-btn {
+  background-color: #3a1f1f;
+  color: #f28b82;
+}
+.decline-btn:hover {
+  background-color: #4a2424;
+}
+
+.accept-btn:disabled,
+.decline-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-pending {
+  font-size: 11.5px;
+  color: #e5c07b;
+  background: #3a341f;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.status-booked {
+  font-size: 11.5px;
+  color: #81c995;
+  background: #1f3a29;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.request-booked-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.request-booked-label {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  background-color: #1f3a29;
+  color: #81c995;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.request-cancel-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #3a1f1f;
+  background-color: transparent;
+  color: #f28b82;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.request-cancel-btn:hover {
+  background-color: #3a1f1f;
+}
+
+.request-cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

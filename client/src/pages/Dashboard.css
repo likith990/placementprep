@@ -1,5 +1,50 @@
+.Dashboard {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  margin: 0;
+}
 
-.Dashboard{
-    background-color: black;
-    color: bisque;
+.dashboard-content {
+  padding: 24px 32px;
+}
+
+.slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-heading {
+  color: #f5f5f5;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab,
+.tab-active {
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13.5px;
+  cursor: pointer;
+  color: #9a9a9a;
+}
+
+.tab-active {
+  background: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
 }
