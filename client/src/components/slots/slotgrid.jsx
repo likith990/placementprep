@@ -1,5 +1,5 @@
 
-import "./SlotGrid.css";
+import "./Slotgrid.css";
 import SlotCard from "./SlotCard";
 import useSlots from "../../hooks/useSlots";
 import CreateSlotDialog from "./CreateSlotDialog";
