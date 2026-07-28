@@ -1,7 +1,6 @@
 
 import Slot from "../models/Slot.js";
-import { isSlotPast } from "../utils/slotTime.js";
-
+import { isSlotPast } from "../utils/SlotTime.js";
 export default async function getSlots(req, res) {
   try {
     const allSlots = await Slot.find({ status: { $ne: "completed" } })

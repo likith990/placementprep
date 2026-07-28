@@ -2,7 +2,7 @@
 
 import Slot from "../models/Slot.js";
 import Feedback from "../models/Feedback.js";
-import { isSlotPast } from "./slotTime.js";
+import { isSlotPast } from "./SlotTime.js";
 
 export async function getPendingFeedback(userId) {
   const slots = await Slot.find({
