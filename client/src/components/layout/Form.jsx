@@ -21,7 +21,7 @@ export default function Form({ onClose, onSlotCreated }) {
       const newSlot = await createSlot({
         title,
         capacity: Number(capacity),
-        starttime,
+        starttime:new Date(starttime).toISOString(),
         duration: Number(duration),
         meetinglink,
       });
