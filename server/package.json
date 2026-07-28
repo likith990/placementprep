@@ -20,6 +20,7 @@
     "express-rate-limit": "^8.6.1",
     "mongodb": "^7.5.0",
     "mongoose": "^9.8.0",
+    "nodemailer": "^9.0.3",
     "path": "^0.12.7",
     "pino": "^10.3.1",
     "pino-http": "^11.0.0",
