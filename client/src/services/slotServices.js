@@ -103,5 +103,5 @@ export async function cancelSlot(slotId) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.message || "Failed to cancel slot");
   }
-  return res.json();
+  return res.json()
 }
