@@ -1,6 +1,5 @@
 
 
-import * as React from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -13,6 +12,8 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import GroupIcon from "@mui/icons-material/Group";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import ConnectForm from "./ConnectForm";
+import useNow from "../../hooks/useNow";
+
 
 const buttonSx = {
   textTransform: "none",
@@ -38,6 +39,8 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
   } = slot;
 
   const [showConnect, setShowConnect] = useState(false);
+  const now = useNow();
+
 
   const isFull = bookedCount >= capacity;
   const initials = interviewer?.username?.[0]?.toUpperCase() || "?";
@@ -52,7 +55,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
 
  function renderActionButton() {
     if (isOwner) {
-      const hasStarted = new Date(starttime).getTime() <= Date.now();
+      const hasStarted = new Date(starttime).getTime() <= now;
 
       if (hasStarted) {
         return (
@@ -72,8 +75,8 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
     }
     
     if (myRequest?.status === "booked") {
-      const hasStarted = new Date(starttime).getTime() <= Date.now();
 
+      const hasStarted = new Date(starttime).getTime() <= now;
       if (hasStarted) {
         return (
           <Button

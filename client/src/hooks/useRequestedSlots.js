@@ -19,8 +19,8 @@ export default function useRequestedSlots() {
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+  queueMicrotask(refresh);
+}, [refresh]);
 
   return { slots, loading, refresh };
 }

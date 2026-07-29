@@ -20,8 +20,8 @@ export default function usePostedSlots() {
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+  queueMicrotask(refresh);
+}, [refresh]);
 
   async function accept(slotId, userId) {
     await acceptRequest(slotId, userId);

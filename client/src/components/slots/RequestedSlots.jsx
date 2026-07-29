@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import useNow from "../../hooks/useNow";
 import useRequestedSlots from "../../hooks/useRequestedSlots";
 import { declineRequest } from "../../services/slotServices";
 import { useUser } from "../../hooks/useUsers";
@@ -15,10 +16,13 @@ const STATUS_CLASS = {
   booked: "status-booked",
 };
 
+
 export default function RequestedSlots() {
   const { slots, loading, refresh } = useRequestedSlots();
   const { user } = useUser();
   const [cancellingId, setCancellingId] = useState(null);
+  const now = useNow();
+
 
   if (loading) return <p className="posted-slot-empty">Loading...</p>;
   if (slots.length === 0) return <p className="posted-slot-empty">You haven't requested any slots yet</p>;
@@ -39,7 +43,7 @@ export default function RequestedSlots() {
     <div>
       {slots.map((slot) => {
         const status = slot.myRequest?.status;
-        const hasStarted = new Date(slot.starttime).getTime() <= Date.now();
+       const hasStarted = new Date(slot.starttime).getTime() <= now;
         const formattedTime = new Date(slot.starttime).toLocaleString(undefined, {
           weekday: "short",
           month: "short",

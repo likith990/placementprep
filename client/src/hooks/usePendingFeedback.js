@@ -20,8 +20,8 @@ export default function usePendingFeedback() {
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+  queueMicrotask(refresh);
+}, [refresh]);
 
   function removeFirst() {
     setQueue((prev) => prev.slice(1));

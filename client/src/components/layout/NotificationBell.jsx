@@ -3,10 +3,12 @@
 import { useState } from "react";
 import useNotifications from "../../hooks/useNotifications";
 import "./NotificationBell.css";
+import useNow from "../../hooks/useNow";
 
 export default function NotificationBell() {
   const [open, setOpen] = useState(false);
-  const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
+  const { notifications, unreadCount,  markAllRead } = useNotifications();
+  const now = useNow();
 
   function toggleOpen() {
     const next = !open;
@@ -15,7 +17,7 @@ export default function NotificationBell() {
   }
 
   function formatTime(dateStr) {
-    const diffMs = Date.now() - new Date(dateStr).getTime();
+   const diffMs = now - new Date(dateStr).getTime();
     const mins = Math.floor(diffMs / 60000);
     if (mins < 1) return "just now";
     if (mins < 60) return `${mins}m ago`;

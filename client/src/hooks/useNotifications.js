@@ -22,10 +22,10 @@ export default function useNotifications() {
   }, []);
 
   useEffect(() => {
-    refresh();
-    const interval = setInterval(refresh, 30000);
-    return () => clearInterval(interval);
-  }, [refresh]);
+  queueMicrotask(refresh);
+  const interval = setInterval(refresh, 30000);
+  return () => clearInterval(interval);
+}, [refresh]);
 
   async function markRead(id) {
     await markNotificationRead(id);
