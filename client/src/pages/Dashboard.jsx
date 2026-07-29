@@ -1,13 +1,13 @@
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import "./Dashboard.css";
 import { useUser } from "../hooks/useUsers";
 import Navbar from "../components/layout/Navbar";
 import SlotGrid from "../components/slots/slotgrid";
 import PostedSlots from "../components/slots/PostedSlots";
 import RequestedSlots from "../components/slots/RequestedSlots";
-import FeedbackModal from "../components/feedback/FeedbackModal";
-import ProfilePage from "./ProfilePage";
+const FeedbackModal = lazy(() => import("../components/feedback/FeedbackModal"));
+const ProfilePage = lazy(() => import("./ProfilePage"));
 import usePendingFeedback from "../hooks/usePendingFeedback";
 
 export default function Dashboard({ logout, session }) {
@@ -20,22 +20,28 @@ export default function Dashboard({ logout, session }) {
   return (
     <div className="Dashboard">
       {!feedbackLoading && pendingFeedback && (
-        <FeedbackModal
-          pending={pendingFeedback}
-          onDone={() => {
-            removeFirst();
-            refreshFeedback();
-          }}
-        />
-      )}
+  <Suspense fallback={null}>
+    <FeedbackModal
+      pending={pendingFeedback}
+      onDone={() => {
+        removeFirst();
+        refreshFeedback();
+      }}
+    />
+  </Suspense>
+)}
       <Navbar session={session} logout={logout} onViewProfile={setViewingUserId} />
       <div className="dashboard-content">
         {viewingUserId ? (
+            <Suspense fallback={<p style={{ padding: "2rem" }}>Loading profile...</p>}>
+
           <ProfilePage
             userId={viewingUserId}
             currentUserId={user?._id}
             onBack={() => setViewingUserId(null)}
           />
+          </Suspense>
+
         ) : (
           <>
             <div className="dashboard-tabs">
