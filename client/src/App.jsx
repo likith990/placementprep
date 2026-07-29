@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { useEffect } from "react";
+
 import { lazy, Suspense } from "react";
-import { authClient } from "./lib/auth-client";
+import { useEffect } from "react";
 import { API_BASE } from "./config.js";
 import { useContext } from "react";
-import { UserContext } from "./context/userContext";
+import { UserContext } from "./context/UserContextObject";
 
 const LandingPage = lazy(() => import("./pages/Landing"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -53,7 +52,7 @@ function App() {
     }
 
     syncUser();
-  }, [session]);
+  }, [session,setUser]);
 
   if (isPending) {
     return <p>Loading...</p>;
