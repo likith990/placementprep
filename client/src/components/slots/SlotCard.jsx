@@ -24,6 +24,15 @@ const buttonSx = {
   "&.Mui-disabled": { color: "#666" },
 };
 
+const primaryButtonSx = {
+  textTransform: "none",
+  fontSize: 13,
+  fontWeight: 600,
+  color: "#fff",
+  backgroundColor: "#4f46e5",
+  "&:hover": { backgroundColor: "#4338ca" },
+};
+
 export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   }) {
   const {
     _id,
@@ -136,7 +145,17 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           mb={1.5}
           onClick={() => interviewer?._id && onViewProfile?.(interviewer._id)}
 
-          sx={{ cursor: interviewer?._id ? "pointer" : "default" }}
+          sx={{
+    cursor: interviewer?._id ? "pointer" : "default",
+    borderRadius: "8px",
+    p: 0.5,
+    m: -0.5,
+    transition: "background-color 0.15s ease",
+    "&:hover": interviewer?._id
+      ? { backgroundColor: "rgba(79, 70, 229, 0.12)" }
+      : {},
+  }}
+
         >
           <Avatar
             src={interviewer?.image}
@@ -146,9 +165,18 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           </Avatar>
           <Stack spacing={0}>
             <Typography sx={{ fontSize: 15, fontWeight: 600 }}>{title}</Typography>
-            <Typography sx={{ fontSize: 12.5, color: "#9a9a9a" }}>
-              with {interviewer?.username || "Unassigned"}
-            </Typography>
+            <Typography
+  className="pp-profile-link-text"
+  sx={{
+    fontSize: 12.5,
+    color: interviewer?._id ? "#9a9a9a" : "#9a9a9a",
+    ".pp-profile-row:hover &": interviewer?._id
+      ? { color: "#818cf8", textDecoration: "underline" }
+      : {},
+  }}
+>
+  with {interviewer?.username || "Unassigned"}
+</Typography>
           </Stack>
         </Stack>
 

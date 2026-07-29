@@ -1,8 +1,10 @@
 
+import Button from "@mui/material/Button";
+
 export default function CreateButton({openForm}){
     return(
         <>
-        <button
+        <Button
       onClick={openForm}
       sx={{
         textTransform: "none",
@@ -18,7 +20,7 @@ export default function CreateButton({openForm}){
       }}
     >
       Create Slot
-    </button>
+    </Button>
         </>
     )
 }
