@@ -4,8 +4,8 @@ import "./Dashboard.css";
 import { useUser } from "../hooks/useUsers";
 import Navbar from "../components/layout/Navbar";
 import SlotGrid from "../components/slots/slotgrid";
-import PostedSlots from "../components/slots/PostedSlots";
-import RequestedSlots from "../components/slots/RequestedSlots";
+const PostedSlots = lazy(() => import("../components/slots/PostedSlots"));
+const RequestedSlots = lazy(() => import("../components/slots/RequestedSlots"));
 const FeedbackModal = lazy(() => import("../components/feedback/FeedbackModal"));
 const ProfilePage = lazy(() => import("./ProfilePage"));
 import usePendingFeedback from "../hooks/usePendingFeedback";
@@ -71,7 +71,9 @@ export default function Dashboard({ logout, session }) {
                     Requested
                   </button>
                 </div>
-                {mySlotsTab === "posted" ? <PostedSlots /> : <RequestedSlots />}
+                <Suspense fallback={<p style={{ padding: "1rem" }}>Loading...</p>}>
+  {mySlotsTab === "posted" ? <PostedSlots /> : <RequestedSlots />}
+</Suspense>
               </>
             )}
           </>

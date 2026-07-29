@@ -1,15 +1,17 @@
-
+import { lazy, Suspense } from "react";
 import "./Slotgrid.css";
 import SlotCard from "./SlotCard";
 import useSlots from "../../hooks/useSlots";
-import CreateSlotDialog from "./CreateSlotDialog";
+const CreateSlotDialog = lazy(() => import("./CreateSlotDialog"));
 
 export default function SlotGrid({ onViewProfile }) {
   const { slots, addSlot, updateMyRequest, cancelBooking } = useSlots();
 
   return (
     <>
-      <CreateSlotDialog onSlotCreated={addSlot} />
+      <Suspense fallback={null}>
+        <CreateSlotDialog onSlotCreated={addSlot} />
+      </Suspense>
       <div className="slot-grid">
         {slots.map((slot) => (
           <SlotCard

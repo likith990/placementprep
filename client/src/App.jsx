@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { authClient } from "./lib/auth-client";
 import { API_BASE } from "./config.js";
 import { useContext } from "react";
 import { UserContext } from "./context/userContext";
 
-import LandingPage from "./pages/Landing";
-import Dashboard from "./pages/Dashboard";
+const LandingPage = lazy(() => import("./pages/Landing"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 import { useAuth } from "./hooks/useAuth";
 import getCurrUser from "./services/userServices";
 
@@ -59,10 +60,19 @@ function App() {
   }
 
   if (!session) {
-    return <LandingPage login={login} />;
+
+    return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <LandingPage login={login} />
+    </Suspense>
+  );
   }
 
-  return <Dashboard session={session} logout={logout} />;
+  return (
+  <Suspense fallback={<p>Loading...</p>}>
+    <Dashboard session={session} logout={logout} />
+  </Suspense>
+ );
 }
 
 export default App;
