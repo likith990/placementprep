@@ -244,7 +244,7 @@ npm run dev
 ## Tips
 
 - Ensure the Google OAuth redirect origin matches `http://localhost:5173`
-- If a slot is already full, new requests cannot be accepted
+- If a slot is already full, new requests cannot be accepted.
 - Users can always cancel their own booked slot requests
 - The app enforces feedback before allowing new interactions, so finish feedback promptly
 
