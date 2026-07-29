@@ -131,7 +131,8 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           alignItems="center"
           spacing={1.5}
           mb={1.5}
-          onClick={() => interviewer?._id && setShowReviews(true)}
+          onClick={() => interviewer?._id && onViewProfile?.(interviewer._id)}
+
           sx={{ cursor: interviewer?._id ? "pointer" : "default" }}
         >
           <Avatar
@@ -164,14 +165,6 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
             </Typography>
           </Stack>
 
-          <Stack
-          direction="row"
-          alignItems="center"
-          spacing={1.5}
-          mb={1.5}
-          onClick={() => interviewer?._id && onViewProfile?.(interviewer._id)}
-          sx={{ cursor: interviewer?._id ? "pointer" : "default" }}
-        ></Stack>
         </Stack>
 
         <Chip
