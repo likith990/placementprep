@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -33,7 +31,7 @@ const primaryButtonSx = {
   "&:hover": { backgroundColor: "#4338ca" },
 };
 
-export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   }) {
+export default function SlotCard({ slot, onConnected, onCancel, onViewProfile }) {
   const {
     _id,
     title,
@@ -62,7 +60,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
     minute: "2-digit",
   });
 
- function renderActionButton() {
+  function renderActionButton() {
     if (isOwner) {
       const hasStarted = new Date(starttime).getTime() <= now;
 
@@ -73,7 +71,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
             startIcon={<VideocamIcon sx={{ fontSize: 16 }} />}
             href={meetinglink}
             target="_blank"
-            sx={buttonSx}
+            sx={primaryButtonSx}
           >
             Join
           </Button>
@@ -82,7 +80,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
 
       return <Button fullWidth disabled sx={buttonSx}>Your slot</Button>;
     }
-    
+
     if (myRequest?.status === "booked") {
 
       const hasStarted = new Date(starttime).getTime() <= now;
@@ -93,7 +91,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
             startIcon={<VideocamIcon sx={{ fontSize: 16 }} />}
             href={meetinglink}
             target="_blank"
-            sx={buttonSx}
+            sx={primaryButtonSx}
           >
             Join
           </Button>
@@ -119,7 +117,7 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
       return <Button fullWidth disabled sx={buttonSx}>Pending</Button>;
     }
     return (
-      <Button fullWidth onClick={() => setShowConnect(true)} sx={buttonSx}>
+      <Button fullWidth onClick={() => setShowConnect(true)} sx={primaryButtonSx}>
         Connect
       </Button>
     );
@@ -143,19 +141,30 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           alignItems="center"
           spacing={1.5}
           mb={1.5}
+          className="pp-profile-row"
           onClick={() => interviewer?._id && onViewProfile?.(interviewer._id)}
-
+          onKeyDown={(e) => {
+            if (interviewer?._id && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              onViewProfile?.(interviewer._id);
+            }
+          }}
+          tabIndex={interviewer?._id ? 0 : -1}
+          role={interviewer?._id ? "button" : undefined}
+          aria-label={interviewer?._id ? `View ${interviewer.username}'s profile` : undefined}
           sx={{
-    cursor: interviewer?._id ? "pointer" : "default",
-    borderRadius: "8px",
-    p: 0.5,
-    m: -0.5,
-    transition: "background-color 0.15s ease",
-    "&:hover": interviewer?._id
-      ? { backgroundColor: "rgba(79, 70, 229, 0.12)" }
-      : {},
-  }}
-
+            cursor: interviewer?._id ? "pointer" : "default",
+            borderRadius: "8px",
+            p: 0.5,
+            m: -0.5,
+            transition: "background-color 0.15s ease",
+            "&:hover": interviewer?._id
+              ? { backgroundColor: "rgba(79, 70, 229, 0.12)" }
+              : {},
+            "&:focus-visible": interviewer?._id
+              ? { outline: "2px solid #4f46e5", outlineOffset: "2px" }
+              : {},
+          }}
         >
           <Avatar
             src={interviewer?.image}
@@ -166,17 +175,16 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           <Stack spacing={0}>
             <Typography sx={{ fontSize: 15, fontWeight: 600 }}>{title}</Typography>
             <Typography
-  className="pp-profile-link-text"
-  sx={{
-    fontSize: 12.5,
-    color: interviewer?._id ? "#9a9a9a" : "#9a9a9a",
-    ".pp-profile-row:hover &": interviewer?._id
-      ? { color: "#818cf8", textDecoration: "underline" }
-      : {},
-  }}
->
-  with {interviewer?.username || "Unassigned"}
-</Typography>
+              sx={{
+                fontSize: 12.5,
+                color: "#9a9a9a",
+                ".pp-profile-row:hover &": interviewer?._id
+                  ? { color: "#818cf8", textDecoration: "underline" }
+                  : {},
+              }}
+            >
+              with {interviewer?.username || "Unassigned"}
+            </Typography>
           </Stack>
         </Stack>
 
@@ -220,10 +228,6 @@ export default function SlotCard({ slot, onConnected,onCancel,onViewProfile   })
           onConnected={() => onConnected(_id, { status: "interested" })}
         />
       )}
-
-      
-
-
     </Card>
   );
 }
