@@ -5,7 +5,7 @@ import { API_BASE } from "./config.js";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContextObject";
 
-const LandingPage = lazy(() => import("./pages/Landing"));
+const LandingPage = lazy(() => import("./pages/Landing.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 import { useAuth } from "./hooks/useAuth";
 import getCurrUser from "./services/userServices";
