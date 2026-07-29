@@ -6,12 +6,18 @@ import { useUser } from "./useUsers";
 
 export default function useSlots() {
   const [slots, setSlots] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = useUser();
 
-  useEffect(() => {
+    useEffect(() => {
     async function fetchSlots() {
-      const data = await getSlots();
-      setSlots(data);
+      setLoading(true);
+      try {
+        const data = await getSlots();
+        setSlots(data);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchSlots();
   }, []);
@@ -46,5 +52,5 @@ export default function useSlots() {
     }
   }
 
-  return { slots, addSlot, updateMyRequest, cancelBooking };
+  return { slots, addSlot, updateMyRequest, cancelBooking,loading };
 }

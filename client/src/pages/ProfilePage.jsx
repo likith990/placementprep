@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getUserProfile, updateMyProfile } from "../services/userServices";
 import "./ProfilePage.css";
+import Loader from "../components/ui/Loader";
 
 function StarDisplay({ value }) {
   if (value === null || value === undefined) {
@@ -242,7 +243,7 @@ export default function ProfilePage({ userId, currentUserId, onBack }) {
     <div className="profile-page">
       <button className="profile-back-btn" onClick={onBack}>← Back</button>
 
-      {loading && <p className="profile-status">Loading...</p>}
+       {loading && <Loader label="Loading profile..." />}
       {!loading && error && <p className="profile-status profile-error">{error}</p>}
 
       {!loading && !error && data && (

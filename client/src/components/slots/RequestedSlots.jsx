@@ -5,6 +5,7 @@ import useRequestedSlots from "../../hooks/useRequestedSlots";
 import { declineRequest } from "../../services/slotServices";
 import { useUser } from "../../hooks/useUsers";
 import "./PostedSlotCard.css";
+import Loader from "../ui/Loader";
 
 const STATUS_LABEL = {
   interested: "Pending",
@@ -23,8 +24,7 @@ export default function RequestedSlots() {
   const [cancellingId, setCancellingId] = useState(null);
   const now = useNow();
 
-
-  if (loading) return <p className="posted-slot-empty">Loading...</p>;
+  if (loading) return <Loader label="Loading your requests..." />;
   if (slots.length === 0) return <p className="posted-slot-empty">You haven't requested any slots yet</p>;
 
   async function handleCancel(slotId) {

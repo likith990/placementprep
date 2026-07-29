@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { API_BASE } from "./config.js";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContextObject";
+import Loader from "./components/ui/Loader";
 
 const LandingPage = lazy(() => import("./pages/Landing.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -55,20 +56,20 @@ function App() {
   }, [session,setUser]);
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <Loader fullScreen label="Loading..." />;
   }
 
   if (!session) {
 
     return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Loader fullScreen label="Loading..." />}>
       <LandingPage login={login} />
     </Suspense>
   );
   }
 
   return (
-  <Suspense fallback={<p>Loading...</p>}>
+  <Suspense fallback={<Loader fullScreen label="Loading..." />}>
     <Dashboard session={session} logout={logout} />
   </Suspense>
  );

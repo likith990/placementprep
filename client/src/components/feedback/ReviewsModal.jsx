@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getUserFeedback } from "../../services/feedbackServices";
 import "./ReviewsModal.css";
+import Loader from "../ui/Loader";
 
 function StarDisplay({ value }) {
   if (value === null) return <span className="reviews-no-data">No ratings yet</span>;
@@ -42,7 +43,7 @@ export default function ReviewsModal({ userId, username, onClose }) {
           <button className="reviews-close-btn" onClick={onClose}>×</button>
         </div>
 
-        {loading && <p className="reviews-empty">Loading...</p>}
+        {loading && <Loader label="Loading reviews..." />}
 
         {!loading && data && (
           <>
