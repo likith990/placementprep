@@ -239,7 +239,7 @@ npm run dev
   - `models/` — MongoDB models
   - `controllers/` — route handlers
   - `middleware/` — auth and rate limiting logic
-  - `utils/` — helper modules
+  - `utils/` — helper modules.
 
 ## Tips
 
