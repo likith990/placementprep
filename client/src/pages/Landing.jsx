@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./Landing.css";
 
-/* ----------------------------------------------------------------------- */
-/*  Small utilities                                                        */
-/* ----------------------------------------------------------------------- */
 
-// Reveals an element once it scrolls into view, and keeps the state so we
-// can trigger count-up numbers / line-draw animations exactly once.
 function useInView(options = { threshold: 0.25 }) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -22,13 +17,13 @@ function useInView(options = { threshold: 0.25 }) {
     }, options);
     observer.observe(node);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
   return [ref, inView];
 }
 
-// Animates a number from 0 -> target once `start` becomes true.
+
 function useCountUp(target, start, duration = 1400) {
   const [value, setValue] = useState(0);
   useEffect(() => {
@@ -46,10 +41,6 @@ function useCountUp(target, start, duration = 1400) {
   }, [start, target, duration]);
   return value;
 }
-
-/* ----------------------------------------------------------------------- */
-/*  Icon set — small inline SVGs, no icon library                          */
-/* ----------------------------------------------------------------------- */
 
 const Icon = {
   logo: (p) => (
@@ -147,9 +138,6 @@ const Icon = {
   ),
 };
 
-/* ----------------------------------------------------------------------- */
-/*  Section: Nav                                                           */
-/* ----------------------------------------------------------------------- */
 
 function Nav({ onLogin }) {
   const [scrolled, setScrolled] = useState(false);
@@ -186,9 +174,6 @@ function Nav({ onLogin }) {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 1: Hero + interactive dashboard mockup                         */
-/* ----------------------------------------------------------------------- */
 
 function DashboardMock() {
   const [ref, inView] = useInView({ threshold: 0.4 });
@@ -308,9 +293,6 @@ function Hero({ onLogin }) {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 2: The problem — vertical visual timeline                      */
-/* ----------------------------------------------------------------------- */
 
 const PROBLEMS = [
   { icon: Icon.users, title: "Nobody to practice with", desc: "Friends are busy, seniors are hard to reach, and solo prep only goes so far." },
@@ -360,9 +342,7 @@ function ProblemSection() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 3: How it works — horizontal timeline that draws on scroll     */
-/* ----------------------------------------------------------------------- */
+
 
 const STEPS = [
   { title: "Create a slot", desc: "Open a time slot for a mock interview." },
@@ -401,9 +381,6 @@ function HowItWorks() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 4: Feature showcase — editorial bento grid                     */
-/* ----------------------------------------------------------------------- */
 
 function BentoPreviewScheduling() {
   return (
@@ -519,9 +496,7 @@ function FeatureShowcase() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 5: Product walkthrough — alternating screenshots               */
-/* ----------------------------------------------------------------------- */
+
 
 function ScreenDashboard() {
   return (
@@ -667,9 +642,7 @@ function Walkthrough() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 6: Why students love it — benefits + stats                     */
-/* ----------------------------------------------------------------------- */
+
 
 const BENEFITS = [
   { icon: Icon.spark, title: "Become confident", desc: "Repetition under real conditions turns nerves into muscle memory." },
@@ -727,9 +700,7 @@ function WhyLoveIt() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 8: Testimonials                                                */
-/* ----------------------------------------------------------------------- */
+
 
 const TESTIMONIALS = [
   {
@@ -795,9 +766,6 @@ function Testimonials() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Section 9: Final CTA                                                   */
-/* ----------------------------------------------------------------------- */
 
 function FinalCTA({ onLogin }) {
   return (
@@ -817,9 +785,6 @@ function FinalCTA({ onLogin }) {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Footer                                                                 */
-/* ----------------------------------------------------------------------- */
 
 function Footer() {
   return (
@@ -843,9 +808,7 @@ function Footer() {
   );
 }
 
-/* ----------------------------------------------------------------------- */
-/*  Page                                                                   */
-/* ----------------------------------------------------------------------- */
+
 
 export default function LandingPage({ login }) {
   const handleLogin = useCallback(() => {
